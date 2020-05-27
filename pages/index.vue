@@ -85,12 +85,49 @@
                 <v-range-slider
                   :tick-labels="memories"
                   v-model="memoryRange"
+                  @change="setMemoryRange"
                   min="0"
                   max="7"
                   ticks="always"
                   tick-size="4"
                 >
                 </v-range-slider>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Операционная система</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col class="px-4">
+                    <v-checkbox 
+                      v-model="iOS" 
+                      label="iOS" 
+                      color="indigo" 
+                      @change="iOSHandler"
+                    ></v-checkbox>
+                    <v-checkbox 
+                      v-model="android" 
+                      label="Android" 
+                      color="indigo"
+                      @change="androidHandler"
+                    ></v-checkbox>
+                  </v-col>
+                </v-row>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>SIM-карты</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col class="px-4">
+                    <v-checkbox 
+                      v-model="hasTwoSimCards" 
+                      label="С двумя SIM-картами" 
+                      color="indigo" 
+                      @change="twoSimCardsHandler"
+                    ></v-checkbox>
+                  </v-col>
+                </v-row>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -134,7 +171,7 @@ export default {
       queryString: '',
       hasDiscount: false,
       hasCredit: false,
-      memories: ["4", "8", "16", "32", "64", "128", "256", "512"]
+      memories: ["4", "8", "16", "32", "64", "128", "256", "512"],
     }
   },
   computed: {
@@ -152,6 +189,15 @@ export default {
     },
     memoryRange() {
       return this.$store.state.memoryRange;
+    },
+    iOS() {
+      return this.$store.state.iOS;
+    },
+    android() {
+      return this.$store.state.android;
+    },
+    hasTwoSimCards() {
+      return this.$store.state.hasTwoSimCards;
     },
     phones() {
       return this.$store.state.phones;
@@ -204,7 +250,27 @@ export default {
       this.$store.dispatch('SET_CREDIT', {
         value: e
       });
-    }
+    },
+    setMemoryRange(e) {
+      this.$store.dispatch('SET_MEMORY_RANGE', {
+        range: e
+      });
+    },
+    iOSHandler(e) {
+      this.$store.dispatch('SET_IOS', {
+        value: e
+      });
+    },
+    androidHandler(e) {
+      this.$store.dispatch('SET_ANDROID', {
+        value: e
+      });
+    },
+    twoSimCardsHandler(e) {
+      this.$store.dispatch('SET_TWO_SIM_CARDS', {
+        value: e
+      });
+    },
   }
 }
 </script>
