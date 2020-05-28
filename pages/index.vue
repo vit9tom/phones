@@ -275,7 +275,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .page_container {
     background: #fff;
     display: -webkit-flex;
@@ -298,6 +298,7 @@ export default {
 
   .r_column {
     flex-grow: 1;
+    flex-shrink: 1;
   }
 
   .header {
@@ -335,6 +336,7 @@ export default {
     -o-flex-direction: row;
     flex-direction: row;
     flex-wrap: wrap;
+    flex-shrink: 1;
   }
 
   .card_wrapper {
@@ -343,5 +345,31 @@ export default {
 
   .v-text-field {
     font-size: 12px;
+  }
+
+  @media (max-width: 1050px) {
+    .card_wrapper {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .page_container {
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      -ms-flex-direction: column;
+      -o-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .card_wrapper {
+      width: 100%;
+    }
   }
 </style>

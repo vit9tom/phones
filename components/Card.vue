@@ -1,20 +1,12 @@
 <template>
-	<v-card tile height="100%">
+	<v-card tile height="100%" @click="openPage">
 		<div class="wrapper">
-			<div class="flex_item" @mouseover="onMouseOver" @mouseout="onMouseOut">
-				<v-img 
-					:src="'http://localhost:1337' + phone.photos[1].url" 
-					alt="" height="200" 
-					width="100%" 
-					contain
-					v-show="isMouseOver"
-				></v-img>
+			<div class="flex_item">
 				<v-img 
 					:src="'http://localhost:1337' + phone.photos[0].url" 
 					alt="" height="200" 
 					width="100%" 
 					contain
-					v-show="!isMouseOver"
 				>
 					<template v-slot:placeholder>
 				        <v-row
@@ -29,14 +21,7 @@
 				    </template>
 				</v-img>
 				<div id="name">{{phone.name}}</div>
-				<div id="rating" v-if="hasRating">
-					<div id="stars">
-						<img src="~/assets/img/rate.svg" alt="">
-					</div>
-					<div id="rating_bar" ref="rating_bar">
-						<img src="~/assets/img/filled-stars.svg" alt="">
-					</div>
-				</div>
+				<Rating :rating="phone.rating" v-if="hasRating"/>
 			</div>
 			<div class="credit" v-if="hasCredit">
 				<div class="credit_numbers">0|0|{{phone.creditTerm}}</div>
@@ -56,13 +41,12 @@
 </template>
 
 <script>
+	import Rating from '~/components/Rating.vue'
 	export default {
+		components: {
+		    Rating
+		  },
 		props: ['phone'],
-		data() {
-		  return {
-		  	isMouseOver: false
-		  }
-		},
 		computed: {
 			hasCredit() {
 				return !!this.phone.creditTerm;
@@ -75,23 +59,14 @@
 			},
 			hasRating() {
 				return !!this.phone.rating;
-			},
-			ratingPercents() {
-				return 100 * this.phone.rating / 5;
 			}
 		},
 		mounted: function() {
-			if (this.phone.rating) {
-				const ratingBar = this.$refs.rating_bar;
-				ratingBar.style.width = `${this.ratingPercents}%`;
-			}
+			
 		},
 		methods: {
-			onMouseOver(e) {
-				this.isMouseOver = true;
-			},
-			onMouseOut(e) {
-				this.isMouseOver = false;
+			openPage(e) {
+				this.$router.push('/phones/' + this.phone.id)
 			}
 		}
 	}
@@ -116,6 +91,7 @@
 		align-items: stretch;
 		height: 100%;
 		cursor: pointer;
+		box-sizing: border-box;
 	}
 
 	.image {
@@ -155,18 +131,6 @@
 		font-size: 8px;
 	    text-transform: uppercase;
 	    font-weight: bold;
-	}
-
-	#rating {
-		position: relative;
-		display: inline-block;
-	}
-
-	#rating_bar {
-		position: absolute;
-		top: 0;
-		left: 0;
-		overflow: hidden;
 	}
 
 	#price {

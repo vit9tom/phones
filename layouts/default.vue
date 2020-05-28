@@ -1,7 +1,9 @@
 <template>
   <div class="default_container">
     <header>
-      <div class="logo">Logo</div>
+      <div class="logo">
+        <router-link to="/">Logo</router-link>
+      </div>
       <div class="cart">
         Корзина
       </div>
@@ -67,7 +69,7 @@ export default {
     -ms-align-items: center;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 15px 30px;
     position: fixed;
     width: 100%;
     border-bottom: 1px solid #777;
@@ -77,5 +79,10 @@ export default {
 
   .logo {
     font-size: 24px;
+  }
+
+  .logo a {
+    color: indigo;
+    text-decoration: none;
   }
 </style>
