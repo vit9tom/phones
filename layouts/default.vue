@@ -1,61 +1,43 @@
 <template>
-  <div class="default_container">
-    <header>
-      <div class="logo">
-        <router-link to="/">Logo</router-link>
-      </div>
-      <div class="cart">
-        Корзина
-      </div>
-    </header>
-
-    <main>
-      <v-breadcrumbs :items="items">
-        <template v-slot:divider>
-          <v-icon>mdi-chevron-right</v-icon>
-        </template>
-      </v-breadcrumbs>
-      <nuxt />
-    </main>
-    
-  </div>
-  
+    <div class="default_container">
+        <header>
+            <div class="logo">
+                <router-link to="/">Logo</router-link>
+            </div>
+            <div class="cart">
+                Корзина
+            </div>
+        </header>
+        <main>
+            <nuxt />
+        </main>
+    </div>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+    data() {
+        return {
+
         }
-      ]
     }
-  }
 }
+
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-  .default_container {
+.default_container {
     background: #eaeaea;
     font-family: 'Roboto', sans-serif;
-  }
+}
 
-  main {
+main {
     padding: 80px 20px;
-  }
+}
 
-  header {
+header {
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flex;
@@ -75,14 +57,15 @@ export default {
     border-bottom: 1px solid #777;
     background: #fff;
     z-index: 20;
-  }
+}
 
-  .logo {
+.logo {
     font-size: 24px;
-  }
+}
 
-  .logo a {
+.logo a {
     color: indigo;
     text-decoration: none;
-  }
+}
+
 </style>
